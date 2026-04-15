@@ -1,0 +1,312 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--or:#c49f75;--bl:#394351;--or2:#d4b08a;--bl2:#4a5668;--bg:#05070E;--bg2:rgba(8,11,22,.78);--bd:rgba(255,255,255,.07);}
+.app{display:flex;height:780px;font-family:"Trebuchet MS",Helvetica,sans-serif;color:#fff;border-radius:12px;overflow:hidden;border:0.5px solid rgba(255,255,255,.08);position:relative;background:var(--bg);}
+.app-bg{position:absolute;inset:0;z-index:0;background:
+  radial-gradient(ellipse 48% 38% at 10% 18%,rgba(196,159,117,.28) 0%,transparent 56%),
+  radial-gradient(ellipse 55% 45% at 78% 60%,rgba(57,67,81,.35) 0%,transparent 58%),
+  radial-gradient(ellipse 85% 75% at 50% 50%,rgba(5,8,28,.88) 0%,transparent 100%),
+  #05070E;}
+.sidebar{width:210px;flex-shrink:0;background:rgba(3,4,10,.9);border-right:0.5px solid var(--bd);display:flex;flex-direction:column;padding:20px 0;position:relative;z-index:2;}
+.brand{padding:0 16px 16px;border-bottom:0.5px solid var(--bd);margin-bottom:12px;}
+.brand-row{display:flex;align-items:center;gap:9px;margin-bottom:10px;}
+.brand-mark{width:22px;height:22px;flex-shrink:0;}
+.brand-name{font-family:"Trebuchet MS",Helvetica,sans-serif;font-size:13px;font-weight:700;letter-spacing:.22em;color:#fff;text-transform:uppercase;}
+.cpill{background:rgba(196,159,117,.1);border:0.5px solid rgba(196,159,117,.25);border-radius:6px;padding:6px 10px;}
+.cpill-lbl{font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.1em;text-transform:uppercase;margin-bottom:2px;}
+.cpill-name{font-size:12px;color:var(--or);font-weight:600;}
+.nl{font-size:9px;letter-spacing:.22em;color:rgba(255,255,255,.18);text-transform:uppercase;padding:0 16px;margin:12px 0 5px;}
+.ni{display:flex;align-items:center;gap:9px;padding:7px 14px;cursor:pointer;font-size:12.5px;color:rgba(255,255,255,.36);transition:all .12s;margin:1px 7px;border-radius:7px;}
+.ni:hover{color:rgba(255,255,255,.7);background:rgba(255,255,255,.04);}
+.ni.on{color:var(--or);background:rgba(196,159,117,.1);border:0.5px solid rgba(196,159,117,.22);}
+.ni-ic{width:13px;height:13px;flex-shrink:0;opacity:.55;}
+.ni.on .ni-ic{opacity:1;}
+.nbadge{margin-left:auto;background:rgba(57,67,81,.4);color:var(--bl2);font-size:9.5px;padding:1px 6px;border-radius:8px;}
+.sfoot{margin-top:auto;padding:12px 16px 0;border-top:0.5px solid var(--bd);}
+.sfoot-lbl{font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.18);text-transform:uppercase;margin-bottom:7px;}
+.chips{display:flex;gap:5px;}
+.chip{font-size:9px;padding:3px 8px;border-radius:4px;font-weight:600;letter-spacing:.05em;}
+.cd{background:rgba(57,67,81,.3);color:var(--bl2);border:0.5px solid rgba(57,67,81,.4);}
+.ca{background:rgba(196,159,117,.15);color:var(--or);border:0.5px solid rgba(196,159,117,.28);}
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;position:relative;z-index:2;}
+.tbar{padding:15px 22px;border-bottom:0.5px solid var(--bd);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:rgba(3,5,12,.65);}
+.tbar-t{font-family:"Trebuchet MS",Helvetica,sans-serif;font-size:13.5px;font-weight:700;color:#fff;letter-spacing:.06em;text-transform:uppercase;}
+.tbar-s{font-size:11px;color:rgba(255,255,255,.28);margin-top:3px;}
+.tbar-r{display:flex;align-items:center;gap:11px;}
+.psel{background:rgba(255,255,255,.05);border:0.5px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(255,255,255,.5);font-size:11.5px;font-family:"Trebuchet MS",Helvetica,sans-serif;padding:5px 11px;cursor:pointer;}
+.live{display:flex;align-items:center;gap:6px;}
+.ldot{width:6px;height:6px;border-radius:50%;background:var(--or);}
+.ltxt{font-size:11px;color:rgba(255,255,255,.32);}
+.content{flex:1;overflow-y:auto;padding:18px 22px;}
+.vw{display:none;}
+.vw.on{display:block;}
+.mr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:14px;}
+.mc{background:var(--bg2);border:0.5px solid var(--bd);border-radius:9px;padding:13px 15px;}
+.mc.hl{border-color:rgba(196,159,117,.3);background:rgba(196,159,117,.07);}
+.mc.hlb{border-color:rgba(57,67,81,.5);background:rgba(57,67,81,.18);}
+.mlbl{font-size:9.5px;color:rgba(255,255,255,.28);letter-spacing:.13em;text-transform:uppercase;margin-bottom:6px;}
+.mv{font-size:22px;font-weight:700;font-family:"Trebuchet MS",Helvetica,sans-serif;color:#fff;line-height:1;}
+.mv.or{color:var(--or);}
+.mv.bl{color:var(--bl2);}
+.mdelta{font-size:10.5px;margin-top:5px;}
+.dup{color:var(--or2);}
+.ddn{color:#E05050;}
+.dm{color:rgba(255,255,255,.28);}
+.g2{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:12px;margin-bottom:12px;}
+.pnl{background:var(--bg2);border:0.5px solid var(--bd);border-radius:9px;padding:15px;}
+.pnl-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px;}
+.pnl-t{font-size:10.5px;color:rgba(255,255,255,.38);letter-spacing:.14em;text-transform:uppercase;}
+.pnl-b{font-size:9.5px;background:rgba(196,159,117,.14);color:var(--or);padding:2px 8px;border-radius:4px;border:0.5px solid rgba(196,159,117,.22);}
+.pnl-bb{font-size:9.5px;background:rgba(57,67,81,.3);color:var(--bl2);padding:2px 8px;border-radius:4px;border:0.5px solid rgba(57,67,81,.4);}
+.sm2{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:11px;}
+.smc{background:rgba(255,255,255,.04);border-radius:7px;padding:9px 11px;}
+.sml{font-size:9.5px;color:rgba(255,255,255,.26);margin-bottom:3px;}
+.smv{font-size:15px;font-weight:700;font-family:"Trebuchet MS",Helvetica,sans-serif;color:#fff;}
+.smv.or{color:var(--or);}
+.smv.bl{color:var(--bl2);}
+.pb{height:4px;background:rgba(255,255,255,.07);border-radius:2px;margin-top:9px;}
+.pf{height:4px;border-radius:2px;background:var(--or);}
+.phase-row{display:flex;gap:10px;}
+.phb{flex:1;border-radius:8px;padding:12px 13px;}
+.phb-d{background:rgba(57,67,81,.15);border:0.5px solid rgba(57,67,81,.35);}
+.phb-a{background:rgba(196,159,117,.07);border:0.5px solid rgba(196,159,117,.28);}
+.phn{font-size:9px;color:rgba(255,255,255,.22);letter-spacing:.16em;text-transform:uppercase;margin-bottom:3px;}
+.phname{font-family:"Trebuchet MS",Helvetica,sans-serif;font-size:12px;font-weight:700;color:#fff;margin-bottom:2px;letter-spacing:.06em;text-transform:uppercase;}
+.phstat{font-size:11px;}
+.row-h{display:grid;gap:0;padding:5px 0 7px;border-bottom:0.5px solid rgba(255,255,255,.07);margin-bottom:2px;}
+.row-h span{font-size:9.5px;color:rgba(255,255,255,.22);letter-spacing:.1em;text-transform:uppercase;}
+.loc-rh{grid-template-columns:2fr 1fr 1fr 1fr 80px 80px;}
+.loc-r{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 80px 80px;align-items:center;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,.04);}
+.loc-r:last-child{border-bottom:none;}
+.ln{width:22px;height:22px;border-radius:5px;background:rgba(196,159,117,.13);color:var(--or);font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.lname{font-size:12.5px;color:rgba(255,255,255,.78);}
+.lv{font-size:12px;color:#fff;font-weight:600;text-align:right;}
+.lm{font-size:12px;text-align:right;}
+.lc{font-size:12px;text-align:right;}
+.lst{text-align:right;}
+.sp{font-size:9.5px;padding:2px 8px;border-radius:4px;display:inline-block;}
+.sp-l{background:rgba(57,67,81,.3);color:var(--bl2);border:0.5px solid rgba(57,67,81,.4);}
+.sp-o{background:rgba(196,159,117,.14);color:var(--or);border:0.5px solid rgba(196,159,117,.22);}
+.rb-rh{grid-template-columns:56px 1fr 76px 68px 82px;}
+.rb-r{display:grid;grid-template-columns:56px 1fr 76px 68px 82px;align-items:center;padding:7px 0;border-bottom:0.5px solid rgba(255,255,255,.04);}
+.rb-r:last-child{border-bottom:none;}
+.rs{font-size:9.5px;padding:2px 7px;border-radius:4px;display:inline-block;}
+.rs-w{background:rgba(57,67,81,.3);color:var(--bl2);}
+.rs-r{background:rgba(196,159,117,.14);color:var(--or);}
+.rs-s{background:rgba(100,120,160,.15);color:#8AA0C8;}
+.rs-p{background:rgba(180,140,60,.12);color:#C8A840;}
+.kb-rh{grid-template-columns:86px 1fr 80px 60px;}
+.kb-r{display:grid;grid-template-columns:86px 1fr 80px 60px;align-items:center;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,.04);}
+.kb-r:last-child{border-bottom:none;}
+.kbtag{font-size:9.5px;padding:2px 8px;border-radius:4px;background:rgba(57,67,81,.28);color:var(--bl2);border:0.5px solid rgba(57,67,81,.4);display:inline-block;}
+.eq-ctr{text-align:center;padding:16px 0 13px;}
+.eq-v{font-family:"Trebuchet MS",Helvetica,sans-serif;font-size:44px;font-weight:700;color:var(--or);line-height:1;}
+.eq-l{font-size:10px;color:rgba(255,255,255,.26);letter-spacing:.16em;text-transform:uppercase;margin-top:5px;}
+.eq-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,.05);font-size:12px;}
+.eq-row:last-child{border-bottom:none;}
+.eq-k{color:rgba(255,255,255,.34);}
+.eq-val{color:#fff;font-weight:600;}
+.pipe-r{display:grid;grid-template-columns:56px 1fr 80px 88px 110px;align-items:center;padding:8px 0;border-bottom:0.5px solid rgba(255,255,255,.04);}
+.pipe-r:last-child{border-bottom:none;}
+.cw{position:relative;height:160px;margin-top:4px;}
+.cw2{position:relative;height:195px;margin-top:4px;}
+.cw3{position:relative;height:148px;margin-top:4px;}
+</style>
+
+<div class="app">
+<div class="app-bg"></div>
+<div class="sidebar">
+  <div class="brand">
+    <div class="brand-row">
+      <svg class="brand-mark" viewBox="0 0 100 95" fill="white"><path d="M50 3C51 18 63 20 90 30 76 37 70 48 74 82 62 68 54 65 30 82 34 48 28 37 10 30 37 20 49 18 50 3Z"/></svg>
+      <span class="brand-name">Ciridae</span>
+    </div>
+    <div class="cpill">
+      <div class="cpill-lbl">Active client</div>
+      <div class="cpill-name">Apex Restoration Group</div>
+    </div>
+  </div>
+  <div class="nl">Platform</div>
+  <div class="ni on" onclick="sw('overview',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1.5"/><rect x="9" y="1" width="6" height="6" rx="1.5"/><rect x="1" y="9" width="6" height="6" rx="1.5"/><rect x="9" y="9" width="6" height="6" rx="1.5"/></svg>Overview</div>
+  <div class="ni" onclick="sw('locations',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="5" r="3"/><path d="M2 14c0-2.2 2.7-4 6-4s6 1.8 6 4H2z"/></svg>Locations<span class="nbadge">6</span></div>
+  <div class="ni" onclick="sw('rebuttals',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v2H2zm0 4h8v2H2zm0 4h10v2H2z"/></svg>Rebuttals<span class="nbadge">14</span></div>
+  <div class="ni" onclick="sw('pipeline',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3h14v2H1zm2 4h10v2H3zm2 4h6v2H5z"/></svg>Job pipeline</div>
+  <div class="nl">Intelligence</div>
+  <div class="ni" onclick="sw('knowledge',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a5 5 0 100 10A5 5 0 008 1zm0 2a3 3 0 110 6A3 3 0 018 3zM6 13h4v2H6z"/></svg>Knowledge base</div>
+  <div class="nl">Equity</div>
+  <div class="ni" onclick="sw('equity',this)"><svg class="ni-ic" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="2,12 6,7 9,10 14,4"/></svg>Value tracker</div>
+  <div class="sfoot">
+    <div class="sfoot-lbl">Deployment phase</div>
+    <div class="chips"><span class="chip cd">WD ✓</span><span class="chip cd">SC ✓</span><span class="chip ca">CC →</span></div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="tbar">
+    <div><div class="tbar-t" id="vt">Portfolio Overview</div><div class="tbar-s">Apex Restoration Group · 6 locations · Month 14</div></div>
+    <div class="tbar-r">
+      <select class="psel"><option>Last 30 days</option><option>Last 90 days</option><option>Since deployment</option></select>
+      <div class="live"><div class="ldot"></div><span class="ltxt">All systems live</span></div>
+    </div>
+  </div>
+  <div class="content">
+
+    <!-- OVERVIEW -->
+    <div class="vw on" id="v-overview">
+      <div class="mr">
+        <div class="mc hl"><div class="mlbl">Portfolio revenue</div><div class="mv or">$21.9M</div><div class="mdelta dup">↑ +$2.7M vs. pre-deployment</div></div>
+        <div class="mc hlb"><div class="mlbl">EBITDA</div><div class="mv bl">$3.5M</div><div class="mdelta dup">↑ 16% margin (was 9%)</div></div>
+        <div class="mc"><div class="mlbl">Cash collection cycle</div><div class="mv bl">41 days</div><div class="mdelta dup">↓ from 74 days at entry</div></div>
+        <div class="mc hl"><div class="mlbl">Value created</div><div class="mv or">$17.6M</div><div class="mdelta dm">vs. $8.6M entry valuation</div></div>
+      </div>
+      <div class="g2">
+        <div class="pnl">
+          <div class="pnl-h"><span class="pnl-t">Revenue & EBITDA trend</span><span class="pnl-b">+14% since deployment</span></div>
+          <div class="cw"><canvas id="c1" role="img" aria-label="Revenue grew from $19.2M to $21.9M and EBITDA from $1.73M to $3.5M over 14 months">Revenue $19.2M to $21.9M, EBITDA $1.73M to $3.5M.</canvas></div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-h"><span class="pnl-t">System metrics</span></div>
+          <div class="sm2">
+            <div class="smc"><div class="sml">Rebuttal approval</div><div class="smv bl">81%</div></div>
+            <div class="smc"><div class="sml">Avg response time</div><div class="smv">11 min</div></div>
+            <div class="smc"><div class="sml">Active jobs</div><div class="smv">47</div></div>
+            <div class="smc"><div class="sml">KB strategies</div><div class="smv or">312</div></div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,.26);margin-bottom:5px;">EBITDA margin toward 18% target</div>
+          <div class="pb"><div class="pf" style="width:89%"></div></div>
+          <div style="display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,.26);margin-top:4px;"><span>Current 16%</span><span>Target 18%</span></div>
+        </div>
+      </div>
+      <div class="pnl">
+        <div class="pnl-h"><span class="pnl-t">Deployment phases</span></div>
+        <div class="phase-row">
+          <div class="phb phb-d"><div class="phn">Phase 01</div><div class="phname">WD</div><div class="phstat" style="color:#4a5668;">Complete · all 6 locations</div></div>
+          <div class="phb phb-d"><div class="phn">Phase 02</div><div class="phname">SC</div><div class="phstat" style="color:#4a5668;">Complete · live in production</div></div>
+          <div class="phb phb-a"><div class="phn">Phase 03</div><div class="phname">CC</div><div class="phstat" style="color:#c49f75;">Active · month 10 of ongoing</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LOCATIONS -->
+    <div class="vw" id="v-locations">
+      <div class="mr">
+        <div class="mc hlb"><div class="mlbl">Locations live</div><div class="mv bl">6 / 6</div></div>
+        <div class="mc hl"><div class="mlbl">Top margin</div><div class="mv or">19.2%</div><div class="mdelta dm">Dallas North</div></div>
+        <div class="mc"><div class="mlbl">Needs attention</div><div class="mv" style="color:#E05050;">12.8%</div><div class="mdelta dm">Fort Worth</div></div>
+        <div class="mc"><div class="mlbl">Avg cash cycle</div><div class="mv bl">41 days</div></div>
+      </div>
+      <div class="pnl">
+        <div class="pnl-h"><span class="pnl-t">Location performance</span></div>
+        <div class="row-h loc-rh"><span>Location</span><span style="text-align:right">Revenue</span><span style="text-align:right">EBITDA</span><span style="text-align:right">Margin</span><span style="text-align:right">Cash cycle</span><span style="text-align:right">Status</span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L1</div><span class="lname">Dallas North</span></div><span class="lv">$4.1M</span><span class="lv" style="font-weight:400">$788K</span><span class="lm" style="color:#c49f75">19.2%</span><span class="lc" style="color:#c49f75">36d</span><span class="lst"><span class="sp sp-l">Live</span></span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L2</div><span class="lname">Dallas South</span></div><span class="lv">$3.8M</span><span class="lv" style="font-weight:400">$684K</span><span class="lm" style="color:#c49f75">18.0%</span><span class="lc" style="color:#c49f75">39d</span><span class="lst"><span class="sp sp-l">Live</span></span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L3</div><span class="lname">Plano</span></div><span class="lv">$3.6M</span><span class="lv" style="font-weight:400">$612K</span><span class="lm" style="color:#c49f75">17.0%</span><span class="lc" style="color:#c49f75">41d</span><span class="lst"><span class="sp sp-l">Live</span></span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L4</div><span class="lname">Arlington</span></div><span class="lv">$3.4M</span><span class="lv" style="font-weight:400">$544K</span><span class="lm" style="color:#d4b08a">16.0%</span><span class="lc" style="color:#d4b08a">44d</span><span class="lst"><span class="sp sp-l">Live</span></span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L5</div><span class="lname">Irving</span></div><span class="lv">$3.5M</span><span class="lv" style="font-weight:400">$525K</span><span class="lm" style="color:#d4b08a">15.0%</span><span class="lc" style="color:#d4b08a">43d</span><span class="lst"><span class="sp sp-l">Live</span></span></div>
+        <div class="loc-r"><div style="display:flex;align-items:center;gap:8px"><div class="ln">L6</div><span class="lname">Fort Worth</span></div><span class="lv">$3.5M</span><span class="lv" style="font-weight:400">$448K</span><span class="lm" style="color:#E05050">12.8%</span><span class="lc" style="color:#E05050">52d</span><span class="lst"><span class="sp sp-o">Optimizing</span></span></div>
+      </div>
+    </div>
+
+    <!-- REBUTTALS -->
+    <div class="vw" id="v-rebuttals">
+      <div class="mr">
+        <div class="mc hlb"><div class="mlbl">Approval rate</div><div class="mv bl">81%</div><div class="mdelta dup">↑ from ~52% pre-deployment</div></div>
+        <div class="mc"><div class="mlbl">Avg response time</div><div class="mv">11 min</div><div class="mdelta dup">↓ from 3 hrs manual</div></div>
+        <div class="mc hl"><div class="mlbl">$ recovered MTD</div><div class="mv or">$184K</div><div class="mdelta dup">↑ +$62K vs. baseline</div></div>
+        <div class="mc"><div class="mlbl">Active rebuttals</div><div class="mv">14</div></div>
+      </div>
+      <div class="g2">
+        <div class="pnl">
+          <div class="pnl-h"><span class="pnl-t">Active rebuttal queue</span></div>
+          <div class="row-h rb-rh"><span>Job ID</span><span>Property</span><span>Insurer</span><span style="text-align:right">Disputed</span><span style="text-align:right">Status</span></div>
+          <div class="rb-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#R-1142</span><span style="font-size:12px;color:rgba(255,255,255,.76)">2847 Oak Ridge Dr</span><span style="font-size:11px;color:rgba(255,255,255,.38)">State Farm</span><span style="font-size:12px;color:#fff;font-weight:600;text-align:right">$18.4K</span><span style="text-align:right"><span class="rs rs-w">Won</span></span></div>
+          <div class="rb-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#R-1148</span><span style="font-size:12px;color:rgba(255,255,255,.76)">114 Creekside Blvd</span><span style="font-size:11px;color:rgba(255,255,255,.38)">Allstate</span><span style="font-size:12px;color:#fff;font-weight:600;text-align:right">$22.1K</span><span style="text-align:right"><span class="rs rs-r">Round 3</span></span></div>
+          <div class="rb-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#R-1151</span><span style="font-size:12px;color:rgba(255,255,255,.76)">910 Westpark Commons</span><span style="font-size:11px;color:rgba(255,255,255,.38)">USAA</span><span style="font-size:12px;color:#fff;font-weight:600;text-align:right">$31.8K</span><span style="text-align:right"><span class="rs rs-s">Sent</span></span></div>
+          <div class="rb-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#R-1154</span><span style="font-size:12px;color:rgba(255,255,255,.76)">432 Maple Creek Ct</span><span style="font-size:11px;color:rgba(255,255,255,.38)">Farmers</span><span style="font-size:12px;color:#fff;font-weight:600;text-align:right">$14.7K</span><span style="text-align:right"><span class="rs rs-p">Drafting</span></span></div>
+          <div class="rb-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#R-1157</span><span style="font-size:12px;color:rgba(255,255,255,.76)">7701 Heritage Trail</span><span style="font-size:11px;color:rgba(255,255,255,.38)">Liberty</span><span style="font-size:12px;color:#fff;font-weight:600;text-align:right">$9.2K</span><span style="text-align:right"><span class="rs rs-s">Sent</span></span></div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-h"><span class="pnl-t">Approval rate by insurer</span></div>
+          <div class="cw2"><canvas id="c2" role="img" aria-label="Horizontal bars: State Farm 88%, USAA 84%, Allstate 79%, Farmers 76%, Liberty 71%">State Farm 88%, USAA 84%, Allstate 79%, Farmers 76%, Liberty 71%.</canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE -->
+    <div class="vw" id="v-pipeline">
+      <div class="mr">
+        <div class="mc hlb"><div class="mlbl">Active jobs</div><div class="mv bl">47</div></div>
+        <div class="mc hl"><div class="mlbl">Pipeline value</div><div class="mv or">$2.1M</div></div>
+        <div class="mc"><div class="mlbl">Avg job value</div><div class="mv">$44.7K</div></div>
+        <div class="mc"><div class="mlbl">Est. close MTD</div><div class="mv bl">$680K</div></div>
+      </div>
+      <div class="pnl" style="margin-bottom:12px">
+        <div class="pnl-h"><span class="pnl-t">Pipeline by stage</span></div>
+        <div class="cw3"><canvas id="c3" role="img" aria-label="Pipeline stages: Scoping 12, Estimating 9, Submitted 11, In rebuttal 8, Approved 7">Scoping 12, Estimating 9, Submitted 11, In rebuttal 8, Approved 7.</canvas></div>
+      </div>
+      <div class="pnl">
+        <div class="pnl-h"><span class="pnl-t">Jobs requiring attention</span><span class="pnl-b">3 flagged</span></div>
+        <div class="pipe-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#J-881</span><span style="font-size:12px;color:rgba(255,255,255,.76)">5th round — adjuster stalling</span><span style="font-size:11px;color:rgba(255,255,255,.38)">$38.2K</span><span style="font-size:11px;color:#E05050">Escalate</span><span style="font-size:11px;color:rgba(255,255,255,.36)">Fort Worth · L6</span></div>
+        <div class="pipe-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#J-874</span><span style="font-size:12px;color:rgba(255,255,255,.76)">Missing supplement docs</span><span style="font-size:11px;color:rgba(255,255,255,.38)">$24.5K</span><span style="font-size:11px;color:#C8A840">Action needed</span><span style="font-size:11px;color:rgba(255,255,255,.36)">Irving · L5</span></div>
+        <div class="pipe-r"><span style="font-size:10px;color:rgba(255,255,255,.28)">#J-869</span><span style="font-size:12px;color:rgba(255,255,255,.76)">74 days unpaid — send demand</span><span style="font-size:11px;color:rgba(255,255,255,.38)">$19.1K</span><span style="font-size:11px;color:#E05050">Overdue</span><span style="font-size:11px;color:rgba(255,255,255,.36)">Dallas South · L2</span></div>
+      </div>
+    </div>
+
+    <!-- KNOWLEDGE BASE -->
+    <div class="vw" id="v-knowledge">
+      <div class="mr">
+        <div class="mc hl"><div class="mlbl">Strategies encoded</div><div class="mv or">312</div></div>
+        <div class="mc hlb"><div class="mlbl">Avg win rate</div><div class="mv bl">81%</div></div>
+        <div class="mc"><div class="mlbl">Cross-loc deploys</div><div class="mv">148</div><div class="mdelta dm">strategies shared</div></div>
+        <div class="mc"><div class="mlbl">Newest strategy</div><div class="mv" style="font-size:16px">2h ago</div></div>
+      </div>
+      <div class="pnl">
+        <div class="pnl-h"><span class="pnl-t">Top performing rebuttal strategies</span></div>
+        <div class="row-h kb-rh"><span>Category</span><span>Strategy</span><span style="text-align:right">Win rate</span><span style="text-align:right">Uses</span></div>
+        <div class="kb-r"><span class="kbtag">Contents</span><span style="font-size:12px;color:rgba(255,255,255,.7)">Per-room ACV formula with waste allowance trigger</span><span style="font-size:12px;color:#c49f75;text-align:right;font-weight:600">94%</span><span style="font-size:11px;color:rgba(255,255,255,.32);text-align:right">48×</span></div>
+        <div class="kb-r"><span class="kbtag">Drywall</span><span style="font-size:12px;color:rgba(255,255,255,.7)">ASTM C840 taping standard — adjuster omit counter</span><span style="font-size:12px;color:#c49f75;text-align:right;font-weight:600">88%</span><span style="font-size:11px;color:rgba(255,255,255,.32);text-align:right">61×</span></div>
+        <div class="kb-r"><span class="kbtag">Paint</span><span style="font-size:12px;color:rgba(255,255,255,.7)">Two-coat standard with existing surface guidance, F9 note</span><span style="font-size:12px;color:#c49f75;text-align:right;font-weight:600">85%</span><span style="font-size:11px;color:rgba(255,255,255,.32);text-align:right">73×</span></div>
+        <div class="kb-r"><span class="kbtag">Carpet</span><span style="font-size:12px;color:rgba(255,255,255,.7)">Pad replacement + waste allowance when removal required</span><span style="font-size:12px;color:#d4b08a;text-align:right;font-weight:600">79%</span><span style="font-size:11px;color:rgba(255,255,255,.32);text-align:right">39×</span></div>
+        <div class="kb-r"><span class="kbtag">Supplement</span><span style="font-size:12px;color:rgba(255,255,255,.7)">Texture match + uniform appearance flagging protocol</span><span style="font-size:12px;color:#d4b08a;text-align:right;font-weight:600">76%</span><span style="font-size:11px;color:rgba(255,255,255,.32);text-align:right">55×</span></div>
+      </div>
+    </div>
+
+    <!-- EQUITY -->
+    <div class="vw" id="v-equity">
+      <div class="g2">
+        <div class="pnl">
+          <div class="eq-ctr"><div class="eq-v">$1.84M</div><div class="eq-l">Ciidae equity value — 7% stake</div></div>
+          <div class="eq-row"><span class="eq-k">Entry platform value</span><span class="eq-val">$8.6M</span></div>
+          <div class="eq-row"><span class="eq-k">Current platform value</span><span class="eq-val" style="color:#4a5668">$26.2M</span></div>
+          <div class="eq-row"><span class="eq-k">Ciidae stake</span><span class="eq-val">7%</span></div>
+          <div class="eq-row"><span class="eq-k">Cash deployed</span><span class="eq-val">$95K</span></div>
+          <div class="eq-row"><span class="eq-k">Cash-on-cash return</span><span class="eq-val" style="color:#c49f75">19.4×</span></div>
+          <div class="eq-row"><span class="eq-k">Months active</span><span class="eq-val">14</span></div>
+        </div>
+        <div class="pnl">
+          <div class="pnl-h"><span class="pnl-t">Value creation drivers</span></div>
+          <div class="cw2"><canvas id="c4" role="img" aria-label="Bar chart: Entry $8.6M, Revenue lift $3.4M, Margin expansion $7.1M, Multiple expansion $6.5M totaling $26.2M">Entry $8.6M + Revenue $3.4M + Margin $7.1M + Multiple $6.5M = $26.2M.</canvas></div>
+        </div>
+      </div>
+      <div class="pnl" style="margin-top:12px">
+        <div class="pnl-h"><span class="pnl-t">Equity scaling — next acquisitions</span><span class="pnl-bb">19× cash-on-cash today</span></div>
+        <div class="cw3"><canvas id="c5" role="img" aria-label="Line chart: Ciidae equity grows from $1.84M at 6 locations to $5.8M at 18 locations">$1.84M at 6 locations to $5.8M at 18 locations.</canvas></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+var vn={overview:'Portfolio Overview',locations:'Location Performance',rebuttals:'Rebuttal Engine',pipeline:'Job Pipeline',knowledge:'Knowledge Base',equity:'Value Tracker'};
+function sw(id,el){document.querySelectorAll('.vw').forEach(function(v){v.classList.remove('on');});document.querySelectorAll('.ni').forEach(function(n){n.classList.remove('on');});document.getElementById('v-'+id).classList.add('on');el.classList.add('on');document.getElementById('vt').textContent=vn[id];}
+var tb={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}}}};
+new Chart(document.getElementById('c1'),{type:'line',data:{labels:['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12','M13','M14'],datasets:[{label:'Revenue ($M)',data:[19.2,19.4,19.7,19.9,20.1,20.3,20.5,20.7,20.9,21.1,21.3,21.5,21.7,21.9],borderColor:'#c49f75',backgroundColor:'rgba(196,159,117,.07)',fill:true,tension:.4,pointRadius:2,pointBackgroundColor:'#c49f75'},{label:'EBITDA ($M)',data:[1.73,1.82,1.95,2.06,2.18,2.28,2.45,2.62,2.8,2.98,3.1,3.22,3.38,3.5],borderColor:'#394351',backgroundColor:'rgba(57,67,81,.12)',fill:true,tension:.4,pointRadius:2,pointBackgroundColor:'#394351'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{color:'rgba(255,255,255,.42)',font:{size:10},boxWidth:8,boxHeight:8}}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10},callback:function(v){return '$'+v+'M';}}}}}});
+new Chart(document.getElementById('c2'),{type:'bar',data:{labels:['State Farm','USAA','Allstate','Farmers','Liberty'],datasets:[{data:[88,84,79,76,71],backgroundColor:['#394351','#394351','#c49f75','#c49f75','#c49f75'],borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10},callback:function(v){return v+'%';}},max:100},y:{grid:{display:false},ticks:{color:'rgba(255,255,255,.42)',font:{size:11}}}}}});
+new Chart(document.getElementById('c3'),{type:'bar',data:{labels:['Scoping','Estimating','Submitted','In rebuttal','Approved'],datasets:[{data:[12,9,11,8,7],backgroundColor:['#394351','#394351','#c49f75','#c49f75','#d4b08a'],borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}},y:{grid:{display:false},ticks:{color:'rgba(255,255,255,.42)',font:{size:11}}}}}});
+new Chart(document.getElementById('c4'),{type:'bar',data:{labels:['Entry value','Revenue lift','Margin expansion','Multiple expansion'],datasets:[{data:[8.6,3.4,7.1,6.5],backgroundColor:['rgba(255,255,255,.1)','#c49f75','#d4b08a','#394351'],borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10},callback:function(v){return '$'+v+'M';}}}}}});
+new Chart(document.getElementById('c5'),{type:'line',data:{labels:['6 loc','8 loc','10 loc','12 loc','15 loc','18 loc'],datasets:[{label:'Ciidae equity',data:[1.84,2.4,3.1,3.8,4.8,5.8],borderColor:'#c49f75',backgroundColor:'rgba(196,159,117,.08)',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#c49f75'},{label:'Platform value',data:[26.2,32,40,52,62,74],borderColor:'#394351',backgroundColor:'rgba(57,67,81,.1)',fill:true,tension:.4,pointRadius:3,pointBackgroundColor:'#394351',yAxisID:'y2'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'top',labels:{color:'rgba(255,255,255,.42)',font:{size:10},boxWidth:8,boxHeight:8}}},scales:{x:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10}}},y:{grid:{color:'rgba(255,255,255,.05)'},ticks:{color:'rgba(255,255,255,.32)',font:{size:10},callback:function(v){return '$'+v+'M';}},position:'left'},y2:{grid:{display:false},ticks:{color:'rgba(255,255,255,.2)',font:{size:10},callback:function(v){return '$'+v+'M';}},position:'right'}}}});
+</script>

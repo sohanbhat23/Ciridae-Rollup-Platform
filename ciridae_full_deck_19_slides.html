@@ -1,0 +1,813 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:#000;}
+.deck{display:flex;flex-direction:column;gap:6px;padding:6px;}
+.slide{
+  font-family:'Montserrat',sans-serif;
+  color:#fff;
+  border-radius:10px;
+  position:relative;
+  overflow:hidden;
+  min-height:360px;
+  padding:36px 44px 30px;
+  background:#060810;
+}
+.bg{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse 55% 35% at 18% 28%,rgba(180,80,20,.36) 0%,transparent 65%),
+    radial-gradient(ellipse 80% 45% at 58% 42%,rgba(50,70,130,.2) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 50% at 78% 58%,rgba(25,45,105,.25) 0%,transparent 60%),
+    radial-gradient(ellipse 90% 80% at 50% 50%,rgba(12,18,44,.65) 0%,transparent 100%),
+    #060810;
+}
+.c{position:relative;z-index:2;}
+.slide-num{position:absolute;top:36px;right:44px;font-size:10px;letter-spacing:.14em;color:rgba(255,255,255,.18);font-weight:700;z-index:3;}
+.label{font-size:9.5px;letter-spacing:.22em;color:rgba(255,255,255,.22);font-weight:700;text-transform:uppercase;margin-bottom:5px;}
+.title{font-size:20px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:#fff;margin-bottom:24px;line-height:1.2;}
+.title.xl{font-size:26px;letter-spacing:.1em;}
+.subtitle{font-size:13px;color:rgba(255,255,255,.45);letter-spacing:.04em;margin-top:-18px;margin-bottom:24px;}
+
+/* GRIDS */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px;}
+
+/* CARDS */
+.card{background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.09);border-radius:8px;padding:16px 15px;}
+.card.accent{border-color:rgba(197,98,42,.5);background:rgba(197,98,42,.06);}
+.card-num{font-size:9.5px;color:rgba(197,98,42,.9);letter-spacing:.18em;font-weight:700;text-transform:uppercase;margin-bottom:6px;}
+.card-num.dim{color:rgba(255,255,255,.2);}
+.card-title{font-size:12px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#fff;margin-bottom:9px;line-height:1.3;}
+.card-body{font-size:11px;color:rgba(255,255,255,.42);line-height:1.75;}
+.card-body b{color:rgba(255,255,255,.72);font-weight:600;}
+.card-foot{margin-top:10px;border-top:.5px solid rgba(255,255,255,.07);padding-top:9px;font-size:10px;color:rgba(255,255,255,.28);line-height:1.5;}
+.card-foot b{color:#D97840;font-weight:700;}
+
+/* BULLETS */
+.blist{list-style:none;padding:0;}
+.blist li{font-size:11.5px;color:rgba(255,255,255,.5);line-height:1.8;padding-left:14px;position:relative;}
+.blist li::before{content:'—';position:absolute;left:0;color:rgba(197,98,42,.7);}
+.blist li b{color:rgba(255,255,255,.82);font-weight:600;}
+
+/* TWO-COL TEXT */
+.tcol{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.col-head{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(197,98,42,.8);font-weight:700;margin-bottom:10px;}
+
+/* TABLE */
+.tbl{width:100%;border-collapse:collapse;font-size:11px;}
+.tbl th{text-align:left;padding:7px 12px;font-size:9px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:rgba(255,255,255,.22);border-bottom:.5px solid rgba(255,255,255,.07);}
+.tbl th.a{color:#C5622A;}
+.tbl td{padding:8px 12px;color:rgba(255,255,255,.38);border-bottom:.5px solid rgba(255,255,255,.04);vertical-align:middle;}
+.tbl td.lbl{color:rgba(255,255,255,.2);font-weight:700;letter-spacing:.07em;text-transform:uppercase;font-size:9px;width:22%;}
+.tbl td.hi{color:rgba(255,255,255,.78);font-weight:600;}
+.tag{background:rgba(197,98,42,.17);color:#E0895A;border-radius:4px;padding:2px 8px;font-size:9.5px;font-weight:700;display:inline-block;}
+.tag.g{background:rgba(20,160,80,.15);color:#40C878;}
+
+/* STAT BLOCKS */
+.stat-row{display:flex;gap:12px;margin-bottom:14px;}
+.stat{flex:1;background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.08);border-radius:8px;padding:14px 16px;}
+.stat-val{font-size:26px;font-weight:800;color:#fff;letter-spacing:-.01em;line-height:1;}
+.stat-val.orange{color:#D97840;}
+.stat-lbl{font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-top:5px;}
+
+/* FLOW */
+.flow{display:flex;align-items:center;gap:0;}
+.flow-step{flex:1;background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.09);border-radius:8px;padding:14px 12px;text-align:center;}
+.flow-step.a{border-color:rgba(197,98,42,.4);background:rgba(197,98,42,.06);}
+.flow-arrow{font-size:14px;color:rgba(255,255,255,.2);padding:0 6px;flex-shrink:0;}
+.flow-num{font-size:9px;color:rgba(197,98,42,.8);letter-spacing:.16em;font-weight:700;text-transform:uppercase;margin-bottom:5px;}
+.flow-label{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#fff;}
+.flow-sub{font-size:10px;color:rgba(255,255,255,.35);margin-top:4px;line-height:1.5;}
+
+/* DIVIDER */
+.div{height:.5px;background:rgba(255,255,255,.07);margin:16px 0;}
+
+/* KEYLINE */
+.keyline{font-size:11px;color:rgba(255,255,255,.28);font-style:italic;margin-top:18px;}
+.keyline b{color:#C5622A;font-style:normal;}
+
+/* CALLOUT */
+.callout{background:rgba(197,98,42,.1);border:.5px solid rgba(197,98,42,.35);border-radius:8px;padding:16px 20px;text-align:center;margin-top:14px;}
+.callout-val{font-size:32px;font-weight:800;color:#E08040;letter-spacing:-.01em;}
+.callout-lbl{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px;}
+
+/* TITLE SLIDE */
+.title-center{text-align:center;padding-top:50px;}
+.title-center .big{font-size:30px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;line-height:1.25;}
+.title-center .sub{font-size:13px;color:rgba(255,255,255,.38);letter-spacing:.06em;margin-top:14px;}
+.title-center .meta{font-size:10px;color:rgba(255,255,255,.2);letter-spacing:.14em;text-transform:uppercase;margin-top:40px;}
+
+/* CLOSING */
+.close-line{font-size:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.9);line-height:1.6;margin-bottom:20px;}
+.close-q{font-size:12px;color:rgba(255,255,255,.38);line-height:1.8;font-style:italic;max-width:520px;}
+</style>
+
+<div class="deck">
+
+<!-- S1 TITLE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">01 / 19</div>
+  <div class="c title-center">
+    <div class="big">AI Roll-Up Platform<br>Scaling Operational Value<br>Through Systems</div>
+    <div class="sub">Turning fragmented businesses into system-driven platforms</div>
+    <div class="meta">Presented by Sohan &nbsp;·&nbsp; Ciridae Strategic Initiative</div>
+  </div>
+</div>
+
+<!-- S2 ORIGIN -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">02 / 19</div>
+  <div class="c">
+    <div class="label">Origin</div>
+    <div class="title">Where This Idea Comes From</div>
+    <div class="tcol">
+      <div>
+        <div class="col-head">PE Gate Experience</div>
+        <ul class="blist">
+          <li>Equity raise facilitation for a multi-location pet services roll-up</li>
+          <li>Sourcing and financing <b>weren't the bottleneck</b></li>
+          <li>Operational integration <b>was the real challenge</b></li>
+          <li>Fragmented pricing, disconnected data, manual workflows across every location</li>
+          <li>Value was underwritten in the model — execution didn't match it</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">The Question It Raised</div>
+        <ul class="blist">
+          <li>What if operational transformation wasn't just <b>delivered</b> — but <b>owned?</b></li>
+          <li>What if the firm building the system stayed <b>embedded in the outcome?</b></li>
+          <li>Ciridae already has the answer: <b>WD → SC → CC</b></li>
+          <li>This deck applies that model at <b>portfolio scale</b></li>
+        </ul>
+        <div class="keyline" style="margin-top:20px;">"The model looked good on paper. <b>The execution didn't match it.</b>"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S3 CORE PROBLEM -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">03 / 19</div>
+  <div class="c">
+    <div class="label">The Problem</div>
+    <div class="title">Roll-Ups Underwrite Value They Can't Execute</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">Industry Reality</div>
+        <ul class="blist">
+          <li>PE roll-ups underwrite <b>15–25% margin improvement</b> post-acquisition</li>
+          <li>Integration timelines: <b>6–12+ months</b> per company</li>
+          <li>Each location runs on <b>different systems,</b> pricing logic, and reporting</li>
+          <li>Operational drag <b>compounds</b> — bandwidth consumed by firefighting</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">The Ciridae-Specific Problem</div>
+        <ul class="blist">
+          <li>Ciridae transforms companies and <b>delivers real outcomes</b></li>
+          <li>But value is created without <b>capturing the upside</b></li>
+          <li><b>"Ciridae was so good we wanted them on our cap table"</b> — that's a signal</li>
+          <li>Without a formalized equity model, <b>value leaves with the engagement</b></li>
+        </ul>
+      </div>
+    </div>
+    <div class="keyline">"You're creating the value. The question is whether you're <b>capturing it.</b>"</div>
+  </div>
+</div>
+
+<!-- S4 INSIGHT -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">04 / 19</div>
+  <div class="c">
+    <div class="label">Key Insight</div>
+    <div class="title">Command & Control Is the Equity Justification</div>
+    <table class="tbl" style="margin-bottom:16px;">
+      <thead><tr><th>Ciridae Phase</th><th>Roll-Up Application</th><th class="a">Value Type</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">WD</td><td>Diagnose fragmented ops at each acquired company</td><td class="hi">Consulting value</td></tr>
+        <tr><td class="lbl">SC</td><td>Build unified AI system across the portfolio</td><td class="hi">Consulting value</td></tr>
+        <tr><td class="lbl" style="color:#D97840;">CC</td><td style="color:rgba(255,255,255,.7);">Operate continuously — take responsibility for performance</td><td class="hi"><span class="tag">Equity value</span></td></tr>
+      </tbody>
+    </table>
+    <ul class="blist">
+      <li>WD and SC are <b>deliverables</b> — traditional consulting value</li>
+      <li>Command and Control is <b>ongoing operational ownership</b> — equity value</li>
+      <li>When you run the system that drives EBITDA, <b>you've earned a seat on the cap table</b></li>
+    </ul>
+    <div class="keyline">"Software executes the work continuously. Ciridae takes responsibility for performance. <b>That's co-ownership.</b>"</div>
+  </div>
+</div>
+
+<!-- S5 THE IDEA -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">05 / 19</div>
+  <div class="c">
+    <div class="label">The Solution</div>
+    <div class="title">AI as the Operating Layer Across the Portfolio</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">Old Model</div>
+        <ul class="blist">
+          <li>Deploy Ciridae engagement</li>
+          <li>Deliver outcomes</li>
+          <li>Exit the relationship</li>
+          <li>Value creation leaves with the team</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">New Model</div>
+        <ul class="blist">
+          <li>Build the <b>operating system</b> once</li>
+          <li>Stay <b>embedded</b> across every acquisition</li>
+          <li>Capture <b>equity in what you create</b></li>
+          <li>Returns compound as portfolio scales</li>
+        </ul>
+      </div>
+    </div>
+    <div class="div"></div>
+    <ul class="blist" style="columns:2;gap:20px;">
+      <li>Ciridae's PE partners manage <b>$400B+ AUM</b> — deal flow exists</li>
+      <li><b>V0 in 5 days</b> — deployment speed is already proven</li>
+      <li>WD + SC + CC <b>framework already built</b> — needs portfolio application</li>
+      <li>a16z backing provides <b>institutional credibility</b> to execute</li>
+    </ul>
+    <div class="keyline">"Integrate companies into systems, not people. <b>Then own the system.</b>"</div>
+  </div>
+</div>
+
+<!-- S6 SYSTEM COMPONENTS -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">06 / 19</div>
+  <div class="c">
+    <div class="label">System Design</div>
+    <div class="title">Ciridae's Operating System — Applied Across a Portfolio</div>
+    <div class="grid3">
+      <div class="card accent">
+        <div class="card-num">01 — WD</div>
+        <div class="card-title">Workflow Redesign</div>
+        <div class="card-body">Map how work actually happens across every location. Identify pricing gaps, scheduling inefficiencies, admin overhead. Redesign around <b>AI execution from Day 1.</b></div>
+        <div class="card-foot"><b>Per acquisition</b> — not reused between companies</div>
+      </div>
+      <div class="card accent">
+        <div class="card-num">02 — SC</div>
+        <div class="card-title">System Construction</div>
+        <div class="card-body">Build unified data infrastructure across all locations. Scheduling optimization, pricing intelligence, workflow automation, ERP/CRM integration — <b>single source of truth</b> for the HoldCo.</div>
+        <div class="card-foot"><b>Portfolio-wide</b> — built once, deployed everywhere</div>
+      </div>
+      <div class="card accent">
+        <div class="card-num">03 — CC</div>
+        <div class="card-title">Command & Control</div>
+        <div class="card-body">Ciridae operates the system in production continuously. Software executes; humans oversee exceptions. <b>This is where equity is earned</b> — ongoing performance responsibility.</div>
+        <div class="card-foot"><b>Ongoing</b> — deepens as portfolio scales</div>
+      </div>
+    </div>
+    <div class="keyline" style="margin-top:14px;">"Ciridae is already building these capabilities. This extends them <b>across a portfolio.</b>"</div>
+  </div>
+</div>
+
+<!-- S7 HOW IT WORKS -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">07 / 19</div>
+  <div class="c">
+    <div class="label">Execution</div>
+    <div class="title">Plug-and-Play Integration at Portfolio Level</div>
+    <div class="flow" style="margin-bottom:20px;">
+      <div class="flow-step a">
+        <div class="flow-num">01</div>
+        <div class="flow-label">Acquire</div>
+        <div class="flow-sub">Fragmented, operationally heavy target. Sub-$2M EBITDA.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-num" style="color:rgba(255,255,255,.2);">02</div>
+        <div class="flow-label">Plug</div>
+        <div class="flow-sub">Connect to Ciridae's pre-built operating system. Already live.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-num" style="color:rgba(255,255,255,.2);">03</div>
+        <div class="flow-label">Standardize</div>
+        <div class="flow-sub">WD aligns workflows, pricing, data across all locations in weeks.</div>
+      </div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step">
+        <div class="flow-num" style="color:rgba(255,255,255,.2);">04</div>
+        <div class="flow-label">Improve</div>
+        <div class="flow-sub">System optimizes continuously. Each location improves the whole.</div>
+      </div>
+    </div>
+    <table class="tbl">
+      <thead><tr><th></th><th>Traditional Integration</th><th class="a">Ciridae CC Model</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Time to standardize</td><td>6–12 months</td><td class="hi"><span class="tag">2–4 weeks</span></td></tr>
+        <tr><td class="lbl">Cost per new location</td><td>High — rebuild each time</td><td class="hi"><span class="tag">Near zero — system already live</span></td></tr>
+        <tr><td class="lbl">Data quality</td><td>Degrades across locations</td><td class="hi"><span class="tag">Compounds across portfolio</span></td></tr>
+        <tr><td class="lbl">Ciridae relationship</td><td>Project-based, ends at delivery</td><td class="hi"><span class="tag">Equity-embedded, ongoing</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- S8 BASE CASE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">08 / 19</div>
+  <div class="c">
+    <div class="label">Financials</div>
+    <div class="title">Base Case — Unit Economics (10 Locations)</div>
+    <div class="grid2" style="margin-bottom:16px;">
+      <div>
+        <div class="col-head">Per-Location Assumptions</div>
+        <table class="tbl">
+          <tbody>
+            <tr><td class="lbl">Revenue</td><td class="hi">$1.2M</td></tr>
+            <tr><td class="lbl">EBITDA Margin</td><td class="hi">10%</td></tr>
+            <tr><td class="lbl">EBITDA</td><td class="hi">$120K</td></tr>
+            <tr><td class="lbl">Multiple</td><td class="hi">6x</td></tr>
+            <tr><td class="lbl">Valuation</td><td class="hi">$720K</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="col-head">Portfolio (10×)</div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-val">$12M</div><div class="stat-lbl">Total Revenue</div></div>
+          <div class="stat"><div class="stat-val">$1.2M</div><div class="stat-lbl">Total EBITDA</div></div>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-val orange">$7.2M</div><div class="stat-lbl">Enterprise Value (6×)</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-head">Why the 6× Discount Exists</div>
+    <ul class="blist" style="columns:2;gap:20px;">
+      <li>Owner-dependent operations → <b>buyer takes on integration risk</b></li>
+      <li>No standardized system → <b>integration risk priced in</b></li>
+      <li>Manual processes → <b>margin ceiling is visible to acquirers</b></li>
+      <li>Fragmented data → <b>limited financial visibility during diligence</b></li>
+    </ul>
+    <div class="keyline">"This is what the business is worth <b>before Ciridae touches it.</b>"</div>
+  </div>
+</div>
+
+<!-- S9 VALUE DRIVERS -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">09 / 19</div>
+  <div class="c">
+    <div class="label">Value Creation</div>
+    <div class="title">Where the Value Comes From — Three Tangible Levers</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">Revenue Drivers (~15% uplift)</div>
+        <table class="tbl">
+          <thead><tr><th>Lever</th><th>Ciridae Tool</th><th class="a">Impact</th></tr></thead>
+          <tbody>
+            <tr><td>Scheduling optimization</td><td>SC → booking logic</td><td class="hi">+10% utilization</td></tr>
+            <tr><td>Pricing intelligence</td><td>WD → demand-based pricing</td><td class="hi">+5% rev / customer</td></tr>
+            <tr><td>No-show reduction</td><td>CC → automated reminders</td><td class="hi">+3–5% captured</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="col-head">Margin Drivers (10% → 18%)</div>
+        <ul class="blist">
+          <li>Workflow automation eliminates <b>redundant admin labor</b> (+3–4%)</li>
+          <li>Better utilization spreads <b>fixed costs</b> over more revenue (+2–3%)</li>
+          <li>Pricing discipline removes <b>underpricing</b> (+2–3%)</li>
+          <li>Centralized data removes <b>coordination overhead</b> (+1–2%)</li>
+        </ul>
+        <div class="keyline" style="margin-top:14px;">"Not theoretical. WD finds the leakage. SC fixes it. <b>CC makes sure it doesn't come back.</b>"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S10 POST-AI PERFORMANCE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">10 / 19</div>
+  <div class="c">
+    <div class="label">Financials</div>
+    <div class="title">Post-System Performance</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">Step-by-Step Build</div>
+        <ul class="blist">
+          <li><b>Revenue:</b> $12.0M × 1.15 = <b>$13.8M</b></li>
+          <li><b>Margin expansion:</b> 10% → 18% (admin savings + utilization + pricing)</li>
+          <li><b>EBITDA:</b> $13.8M × 18% = <b>$2.48M</b></li>
+        </ul>
+        <div class="div"></div>
+        <div class="col-head">Key Insight on EBITDA</div>
+        <div class="card-body" style="font-size:11.5px;color:rgba(255,255,255,.45);line-height:1.8;">
+          EBITDA <b style="color:rgba(255,255,255,.8);">more than doubles</b> despite only a 15% revenue increase. Margin expansion amplifies the gain. This is exactly what PE models underwrite — but rarely achieve <b style="color:rgba(255,255,255,.8);">without a system enforcing it.</b>
+        </div>
+      </div>
+      <div>
+        <div class="col-head">Before vs. After</div>
+        <table class="tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th class="a">After</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">Revenue</td><td>$12.0M</td><td class="hi"><span class="tag">$13.8M</span></td></tr>
+            <tr><td class="lbl">Margin</td><td>10%</td><td class="hi"><span class="tag">18%</span></td></tr>
+            <tr><td class="lbl">EBITDA</td><td>$1.2M</td><td class="hi"><span class="tag">$2.48M</span></td></tr>
+          </tbody>
+        </table>
+        <div class="stat-row" style="margin-top:12px;">
+          <div class="stat"><div class="stat-val orange">2.1×</div><div class="stat-lbl">EBITDA growth</div></div>
+          <div class="stat"><div class="stat-val">+$1.28M</div><div class="stat-lbl">Additional EBITDA</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S11 MULTIPLE EXPANSION -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">11 / 19</div>
+  <div class="c">
+    <div class="label">Valuation</div>
+    <div class="title">Why the Multiple Expands — 6× to 8×</div>
+    <div class="grid2">
+      <div>
+        <table class="tbl">
+          <thead><tr><th>Factor</th><th>Before (6×)</th><th class="a">After (8×)</th></tr></thead>
+          <tbody>
+            <tr><td>Operational consistency</td><td>Low</td><td class="hi"><span class="tag">System-enforced</span></td></tr>
+            <tr><td>Owner dependence</td><td>High</td><td class="hi"><span class="tag">Low — system-driven</span></td></tr>
+            <tr><td>Data visibility</td><td>Fragmented</td><td class="hi"><span class="tag">Centralized dashboard</span></td></tr>
+            <tr><td>Scalability</td><td>Manual</td><td class="hi"><span class="tag">Plug-and-play</span></td></tr>
+            <tr><td>Acquirer confidence</td><td>Discounted</td><td class="hi"><span class="tag">Premium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="col-head">The Market Logic</div>
+        <ul class="blist">
+          <li>Buyers pay for <b>predictability and replicability</b> — not just earnings</li>
+          <li>Tech-enabled service businesses trade at <b>1.5–2× premium</b> to non-tech equivalents</li>
+          <li>CC model means the system keeps running <b>post-acquisition</b></li>
+          <li>Clean data = <b>faster diligence</b> = less discount at exit</li>
+          <li>Proven playbook = <b>lower integration risk</b> for next buyer</li>
+        </ul>
+        <div class="stat-row" style="margin-top:16px;">
+          <div class="stat"><div class="stat-val">6×</div><div class="stat-lbl">Base multiple</div></div>
+          <div class="stat"><div class="stat-val orange">8×</div><div class="stat-lbl">AI-enabled multiple</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S12 TOTAL VALUE CREATION -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">12 / 19</div>
+  <div class="c">
+    <div class="label">Value Creation</div>
+    <div class="title">The Full Picture — Three Levers Compounding</div>
+    <div class="grid2" style="margin-bottom:16px;">
+      <div>
+        <div class="col-head">The Math</div>
+        <table class="tbl">
+          <thead><tr><th>Metric</th><th>Before</th><th class="a">After</th></tr></thead>
+          <tbody>
+            <tr><td class="lbl">EBITDA</td><td>$1.2M</td><td class="hi">$2.48M</td></tr>
+            <tr><td class="lbl">Multiple</td><td>6×</td><td class="hi">8×</td></tr>
+            <tr><td class="lbl">Valuation</td><td>$7.2M</td><td class="hi"><span class="tag">$19.8M</span></td></tr>
+          </tbody>
+        </table>
+        <div class="col-head" style="margin-top:14px;">Why It Compounds, Not Adds</div>
+        <ul class="blist">
+          <li>Revenue growth × <b>higher margin</b> = amplified EBITDA</li>
+          <li>Higher EBITDA × <b>higher multiple</b> = non-linear valuation</li>
+          <li>All three levers <b>multiply</b> each other</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;">
+        <div class="callout" style="width:100%;">
+          <div class="callout-val">+$12.6M</div>
+          <div class="callout-lbl">Value Created — 10 Locations</div>
+        </div>
+        <div style="margin-top:12px;font-size:11px;color:rgba(255,255,255,.35);text-align:center;line-height:1.8;">
+          WD identified the leakage<br>
+          SC built the fix<br>
+          CC ensured it compounded<br>
+          <span style="color:#D97840;font-weight:700;">Every dollar traceable to Ciridae's model</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S13 EQUITY STRUCTURE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">13 / 19</div>
+  <div class="c">
+    <div class="label">Equity Model</div>
+    <div class="title">Platform Ownership Structure</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">HoldCo Structure</div>
+        <ul class="blist" style="margin-bottom:14px;">
+          <li>HoldCo owns <b>all locations</b> under a single cap table</li>
+          <li>Ciridae's stake scales with <b>the entire platform</b> — not renegotiated per deal</li>
+          <li>Aligns Ciridae to <b>total platform value,</b> not individual wins</li>
+        </ul>
+        <div class="col-head">Ownership Split</div>
+        <table class="tbl">
+          <thead><tr><th>Party</th><th>Stake</th><th class="a">Basis</th></tr></thead>
+          <tbody>
+            <tr><td>PE Investors</td><td>70–75%</td><td>Capital deployment</td></tr>
+            <tr><td>Operators</td><td>10–20%</td><td>Management continuity</td></tr>
+            <tr><td style="color:#D97840;font-weight:700;">Ciridae</td><td style="color:#D97840;font-weight:700;">5–15%</td><td><span class="tag">System + CC operations</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="col-head">Already Validated by the Market</div>
+        <div class="card accent" style="margin-bottom:12px;">
+          <div class="card-body" style="font-size:12px;font-style:italic;color:rgba(255,255,255,.65);line-height:1.8;">"Ciridae was so good we wanted them on our cap table."</div>
+          <div class="card-foot" style="color:#D97840;">— Josh Albom, CEO of Factua</div>
+        </div>
+        <ul class="blist">
+          <li>Clients are already <b>asking</b> for cap table participation</li>
+          <li>This formalizes what's <b>already happening organically</b></li>
+          <li>PE partners at <b>$400B AUM</b> provide deal flow to execute immediately</li>
+        </ul>
+        <div class="keyline">"If you're running the system that drives EBITDA, <b>you've earned a seat at the table.</b>"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S14 DEAL MECHANICS -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">14 / 19</div>
+  <div class="c">
+    <div class="label">Deal Mechanics</div>
+    <div class="title">Three Pathways to Equity</div>
+    <div class="grid3" style="margin-bottom:16px;">
+      <div class="card accent">
+        <div style="position:absolute;top:0;right:0;background:rgba(197,98,42,.85);color:#fff;font-size:8.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-bottom-left-radius:6px;">Primary</div>
+        <div class="card-num">01</div>
+        <div class="card-title">Sweat Equity</div>
+        <div class="card-body">Builds + operates system <b>in lieu of full cash fees.</b> WD → SC → CC across full portfolio.</div>
+        <div class="card-foot"><b>5–10% platform stake</b><br>PE-backed roll-ups allocating capital to acquisitions, not services</div>
+      </div>
+      <div class="card">
+        <div class="card-num dim">02</div>
+        <div class="card-title">Reduced Fees + Equity Kicker</div>
+        <div class="card-body">Lower upfront cost <b>~$150–200K</b> vs. $400–600K traditional. Reduced cash + equity on the back end.</div>
+        <div class="card-foot"><b style="color:rgba(255,255,255,.4);">3–7% equity kicker</b><br>Sponsors who want fee validation alongside equity alignment</div>
+      </div>
+      <div class="card">
+        <div class="card-num dim">03</div>
+        <div class="card-title">Co-Investment</div>
+        <div class="card-body">Ciridae invests small capital stake alongside PE sponsor. <b>Pro-rata equity</b> at deal terms.</div>
+        <div class="card-foot"><b style="color:rgba(255,255,255,.4);">Pro-rata equity</b><br>Highest-conviction deals — maximizes long-term platform upside</div>
+      </div>
+    </div>
+    <div class="div"></div>
+    <table class="tbl">
+      <thead><tr><th></th><th>Traditional consulting</th><th class="a">Ciridae roll-up model</th></tr></thead>
+      <tbody>
+        <tr><td class="lbl">Revenue</td><td>Fee-for-service</td><td class="hi"><span class="tag">Equity + reduced fees</span></td></tr>
+        <tr><td class="lbl">Upside</td><td>Capped at fee</td><td class="hi"><span class="tag">Uncapped platform participation</span></td></tr>
+        <tr><td class="lbl">Relationship</td><td>Project-end</td><td class="hi"><span class="tag">Embedded, ongoing</span></td></tr>
+        <tr><td class="lbl">Alignment</td><td>Low</td><td class="hi"><span class="tag">Ciridae wins when the platform wins</span></td></tr>
+      </tbody>
+    </table>
+    <div class="keyline">"<b>Equity</b> replaces billing. <b>Ownership</b> replaces deliverables."</div>
+  </div>
+</div>
+
+<!-- S15 VALUE CAPTURE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">15 / 19</div>
+  <div class="c">
+    <div class="label">Value Capture</div>
+    <div class="title">Turning Operational Impact Into Ownership</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">10-Location Scenario</div>
+        <div class="stat-row">
+          <div class="stat"><div class="stat-val">$12.6M</div><div class="stat-lbl">Value Created</div></div>
+          <div class="stat"><div class="stat-val orange">$1.26M</div><div class="stat-lbl">Ciridae @ 10%</div></div>
+        </div>
+        <div class="col-head" style="margin-top:4px;">30-Location Scenario</div>
+        <table class="tbl">
+          <tbody>
+            <tr><td class="lbl">Revenue</td><td class="hi">~$40M+</td></tr>
+            <tr><td class="lbl">EBITDA</td><td class="hi">~$7M+</td></tr>
+            <tr><td class="lbl">Multiple</td><td class="hi">8×</td></tr>
+            <tr><td class="lbl">Valuation</td><td class="hi">~$56M</td></tr>
+            <tr><td class="lbl" style="color:#D97840;">Ciridae (10%)</td><td><span class="tag">$5–6M</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="col-head">The Compounding Dynamic</div>
+        <ul class="blist">
+          <li>System built once — <b>marginal cost of adding locations is near zero</b></li>
+          <li>Every new acquisition improves <b>data quality → better optimization → higher margins</b></li>
+          <li>Ciridae equity <b>appreciates as platform scales</b> without proportional cost increase</li>
+          <li>Consistent with how Ciridae operates — <b>PE relationships and deployment speed already proven</b></li>
+        </ul>
+        <div class="callout" style="margin-top:14px;">
+          <div class="callout-val">$56M</div>
+          <div class="callout-lbl">Platform at 30 Locations</div>
+        </div>
+      </div>
+    </div>
+    <div class="keyline">"Ciridae captures the upside it helps create — <b>at increasing scale.</b>"</div>
+  </div>
+</div>
+
+<!-- S16 OPERATING LEVERAGE -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">16 / 19</div>
+  <div class="c">
+    <div class="label">Scalability</div>
+    <div class="title">System-Level Operating Leverage</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">The Software Analogy</div>
+        <ul class="blist" style="margin-bottom:14px;">
+          <li>SaaS product: built once, deployed to thousands at near-zero marginal cost</li>
+          <li>Same logic: <b>operating system built once,</b> deployed across every acquisition</li>
+          <li>Every new location adds data → <b>better scheduling, pricing, workflow optimization</b></li>
+          <li>Performance <b>compounds across the portfolio</b></li>
+        </ul>
+        <div class="col-head">The Flywheel</div>
+        <div class="flow" style="flex-wrap:wrap;gap:8px;">
+          <div class="flow-step a" style="flex:unset;padding:10px 12px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">More locations</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="flex:unset;padding:10px 12px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">More data</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="flex:unset;padding:10px 12px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">Better margins</div>
+          <div class="flow-arrow">→</div>
+          <div class="flow-step" style="flex:unset;padding:10px 12px;text-align:center;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;">More deals</div>
+        </div>
+      </div>
+      <div>
+        <div class="col-head">What Scales vs. What Doesn't</div>
+        <table class="tbl">
+          <thead><tr><th>Factor</th><th>Consulting</th><th class="a">Ciridae Model</th></tr></thead>
+          <tbody>
+            <tr><td>New engagement cost</td><td>Full rebuild</td><td class="hi"><span class="tag">Near-zero deploy</span></td></tr>
+            <tr><td>Data across clients</td><td>Siloed</td><td class="hi"><span class="tag">Portfolio-wide</span></td></tr>
+            <tr><td>Return per engagement</td><td>Linear</td><td class="hi"><span class="tag">Exponential</span></td></tr>
+            <tr><td>Ciridae relationship</td><td>Ends at delivery</td><td class="hi"><span class="tag">Deepens with scale</span></td></tr>
+          </tbody>
+        </table>
+        <div class="keyline" style="margin-top:14px;">"Build once. Deploy everywhere. <b>Returns compound. Scales like software.</b>"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S17 WHY THIS WORKS -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">17 / 19</div>
+  <div class="c">
+    <div class="label">Structural Advantages</div>
+    <div class="title">Why This Model Is Structurally Powerful</div>
+    <div class="grid4" style="margin-bottom:16px;">
+      <div class="card accent">
+        <div class="card-num">01</div>
+        <div class="card-title">Aligned Incentives</div>
+        <div class="card-body">Ciridae only wins when the platform wins. No agency problem — outcomes drive compensation.</div>
+      </div>
+      <div class="card">
+        <div class="card-num dim">02</div>
+        <div class="card-title">Lower Client Friction</div>
+        <div class="card-body">Reduced upfront fees lower the barrier to entry. Sponsors get Ciidae's system without full consulting spend.</div>
+      </div>
+      <div class="card">
+        <div class="card-num dim">03</div>
+        <div class="card-title">Repeatable Playbook</div>
+        <div class="card-body">WD → SC → CC already proven. Each acquisition is faster and cheaper than the last.</div>
+      </div>
+      <div class="card">
+        <div class="card-num dim">04</div>
+        <div class="card-title">Data Compounds</div>
+        <div class="card-body">Portfolio-wide data creates an optimization advantage no single-company competitor can replicate.</div>
+      </div>
+    </div>
+    <div class="div"></div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">Already Validated</div>
+        <ul class="blist">
+          <li>PE partners at <b>$400B AUM</b> — deal flow is there</li>
+          <li>Clients asking for <b>cap table participation</b> organically</li>
+          <li><b>a16z backing</b> signals institutional credibility to execute</li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">What Traditional Consulting Misses</div>
+        <ul class="blist">
+          <li>Consulting relationship <b>ends at delivery</b> — Ciridae's deepens with scale</li>
+          <li>Value created in old model <b>leaves with the engagement</b></li>
+          <li>Here, Ciridae stays <b>structurally embedded</b> in value creation</li>
+        </ul>
+      </div>
+    </div>
+    <div class="keyline">"Ciridae becomes embedded in value creation — <b>not external to it.</b>"</div>
+  </div>
+</div>
+
+<!-- S18 STRATEGIC POSITIONING -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">18 / 19</div>
+  <div class="c">
+    <div class="label">Strategic Shift</div>
+    <div class="title">From AI Partner to Operating Platform</div>
+    <div class="grid2">
+      <div>
+        <div class="col-head">The Progression Ciridae Is Already On</div>
+        <table class="tbl" style="margin-bottom:14px;">
+          <thead><tr><th>Stage</th><th>Model</th><th class="a">Value Capture</th></tr></thead>
+          <tbody>
+            <tr><td>AI Partner (now)</td><td>WD + SC + CC per company</td><td>Fee-based</td></tr>
+            <tr><td>Roll-Up Layer</td><td>WD + SC + CC across portfolio</td><td class="hi"><span class="tag">Equity-based</span></td></tr>
+            <tr><td style="color:#D97840;font-weight:700;">Platform Owner</td><td style="color:rgba(255,255,255,.65);">System runs portfolio at scale</td><td class="hi"><span class="tag">Compounding equity</span></td></tr>
+          </tbody>
+        </table>
+        <div class="col-head">Why This Changes Ciridae's Own Valuation</div>
+        <ul class="blist">
+          <li>Services firms valued at <b>1–3× revenue</b></li>
+          <li>Operating platforms with equity participation: <b>6–15× EBITDA</b></li>
+          <li>Moving to equity ownership <b>dramatically changes Ciidae's own profile</b></li>
+        </ul>
+      </div>
+      <div>
+        <div class="col-head">The Shift in One Sentence</div>
+        <div class="card accent" style="margin-bottom:12px;">
+          <div class="card-body" style="font-size:12.5px;line-height:1.9;color:rgba(255,255,255,.65);">
+            Today: Ciridae <b style="color:#fff;">transforms companies.</b><br>
+            Tomorrow: Ciridae <b style="color:#D97840;">owns the operating system that runs them.</b>
+          </div>
+        </div>
+        <ul class="blist">
+          <li>Not just re-architecting other businesses</li>
+          <li><b>Re-architecting Ciridae's own model</b></li>
+          <li>a16z backing + $400B AUM PE network = <b>infrastructure already in place</b></li>
+        </ul>
+        <div class="keyline" style="margin-top:12px;">"Not just transforming companies. <b>Building and owning the system that runs them.</b>"</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- S19 CLOSING -->
+<div class="slide">
+  <div class="bg"></div>
+  <div class="slide-num">19 / 19</div>
+  <div class="c" style="display:flex;flex-direction:column;justify-content:space-between;min-height:290px;">
+    <div>
+      <div class="label">The Opportunity</div>
+      <div class="title xl">From Services<br>to Platform</div>
+    </div>
+    <div class="grid2" style="margin-top:10px;">
+      <div>
+        <div class="col-head">What This Pitch Has Shown</div>
+        <ul class="blist">
+          <li>Roll-ups fail operationally — <b>Ciridae's WD → SC → CC model solves this exactly</b></li>
+          <li>The financial upside is concrete — <b>$12.6M on 10 locations, $56M at 30</b></li>
+          <li>Equity participation is already being requested — <b>this formalizes it</b></li>
+          <li>Existing PE relationships provide <b>immediate deal flow to execute</b></li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:space-between;">
+        <div class="callout">
+          <div class="callout-val" style="font-size:22px;letter-spacing:.02em;">"Scale systems — and capture<br>the value they create."</div>
+        </div>
+        <div class="close-q" style="margin-top:14px;font-size:11px;color:rgba(255,255,255,.28);font-style:italic;line-height:1.8;">
+          "From what I understand, moving toward equity participation is already part of how Ciidae is thinking about growth. I'd love to hear how you're approaching structuring that — and where this fits into what you're building."
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
