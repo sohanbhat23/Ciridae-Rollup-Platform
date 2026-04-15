@@ -1,12 +1,9 @@
 """
 CiridaeDashboard.py
-───────────────────
+
 Serves the CIRIDAE dashboard (index.html / style.css / app.js)
 from the parent directory and opens it in the browser.
 
-Usage:
-    python CiridaeDashboard.py          # default port 8000
-    python CiridaeDashboard.py 9000     # custom port
 """
 
 import http.server
@@ -17,8 +14,7 @@ import sys
 import threading
 
 # Resolve the dashboard directory 
-# Script lives in  …/Downloads/CiridaeDashboard.py
-# Dashboard files are one level up: …/index.html, style.css, app.js
+
 SCRIPT_DIR    = os.path.dirname(os.path.abspath(__file__))
 DASHBOARD_DIR = os.path.normpath(os.path.join(SCRIPT_DIR, ".."))
 
@@ -33,7 +29,7 @@ if missing:
         print(f"          * {f}")
     sys.exit(1)
 
-# Custom handler: serve from dashboard dir, suppress request logs 
+# Custom handler
 class QuietHandler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, directory=DASHBOARD_DIR, **kwargs)
@@ -45,7 +41,7 @@ class QuietHandler(http.server.SimpleHTTPRequestHandler):
             super().log_message(fmt, *args)
 
 
-# Open browser after a short delay (gives server time to bind) 
+# Open browser after a short delay 
 def open_browser():
     url = f"http://localhost:{PORT}"
     print(f"[CIRIDAE] Dashboard -> {url}")
