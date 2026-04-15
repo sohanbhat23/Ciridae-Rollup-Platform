@@ -1,10 +1,11 @@
-# Ciridae Command Center
+# Ciridae Rollup Platform
 
 A full-stack operational dashboard built around Ciridae's AI roll-up platform model. Designed to show what real-time portfolio management looks like when Ciridae deploys its three-phase system — Workflow Redesign, System Construction, and Command and Control — across a PE-backed acquisition portfolio.
 
-Built as a working prototype and presented to the Co-Founder & CEO of Ciridae as part of an AI roll-up strategy pitch.
+#The Pitch Deck
+The document named ciridae_full_deck_19_slides.html contains a 19-slide presentation deck which outlines the entire AI roll-up concept – the issue with existing roll-ups, the idea behind Ciridae’s three-step approach, the economic principles driving value creation, the shareholding structure, and finally, why this business can scale like software. This document can be opened using any web browser to view the complete deck. The deck has been created as a supplement to the dashboard and has been used during the pitch.
 
----
+
 
 ## What It Does
 
@@ -12,7 +13,6 @@ The platform gives PE sponsors and operators a single window into everything Cir
 
 The mock client is **Apex Restoration Group**, a 6-location water, fire, and mold remediation business backed by a lower-middle-market PE firm. The data reflects a 14-month post-deployment snapshot.
 
----
 
 ## The Seven Views
 
@@ -37,7 +37,7 @@ Ciridae's equity position in the portfolio. Hero number — $1.84 million curren
 ### Deal Flow
 M&A acquisition pipeline. 8 active targets, $142 million total pipeline value, $4.2 million projected Ciridae equity across LOI and closed stages. Target Companies table showing entry EV, post-Ciridae EV, equity percentage, and deal stage for each target. Post-Ciridae EV projections apply the same value creation framework proven at Apex — 14 percent revenue lift, margin expansion from 9 to 16 percent, multiple expansion from 5x to 7.5x.
 
----
+
 
 ## The Three Phases
 
@@ -54,7 +54,6 @@ Ciridae operates the system in production and takes ongoing responsibility for p
 
 In Apex's case — WD done, SC done, CC active.
 
----
 
 ## The Equity Model
 
@@ -62,7 +61,7 @@ Traditional consulting charges a fee for WD and SC and exits. This platform is b
 
 The Value Tracker makes that math visible. $95,000 deployed. $1.84 million in equity value. 19.4x return in 14 months. Scales to $5.8 million across six additional acquisitions on the same system with near-zero marginal deployment cost.
 
----
+
 
 ## How It Was Built
 
@@ -74,7 +73,7 @@ The Value Tracker makes that math visible. $95,000 deployed. $1.84 million in eq
 - Python for file generation and local server
 
 **File structure**
-```
+
 ciridae-dashboard/
 ├── index.html        # All views and HTML structure
 ├── style.css         # Full design system
@@ -85,7 +84,7 @@ ciridae-dashboard/
 **Running locally**
 ```bash
 python3 generate_dashboard.py
-```
+
 Opens automatically at `http://localhost:8000`
 
 Or if you already have the files:
@@ -102,17 +101,16 @@ python3 -m http.server 8000
 - All chart colors reference the same palette
 - Half-pixel borders throughout for precision at high-DPI screens
 
----
+
 
 ## The Business Context
 
-This platform was built as part of a strategic pitch to Ciridae's Co-Founder & CEO, Jack Soslow. The core argument — Ciridae is already building systems that create measurable financial value for PE-backed businesses. The platform demonstrates what it looks like when Ciridae formalizes that value creation into an equity participation model, operates it across a roll-up portfolio, and tracks the compounding returns in real time.
+This platform was built as part of a strategic pitch. The core argument — Ciridae is already building systems that create measurable financial value for PE-backed businesses. The platform demonstrates what it looks like when Ciridae formalizes that value creation into an equity participation model, operates it across a roll-up portfolio, and tracks the compounding returns in real time.
 
 The restoration vertical was chosen because Ciridae's published case study is a PE-owned Dallas restoration business — making the model not theoretical but already proven in production.
 
----
 
 ## Author
 
-Sohan — Finance and Business Analytics, University of Pittsburgh  
+Sohan Bhattacharyya — Finance and Business Analytics, University of Pittsburgh  
 Internship experience: Assured Guaranty, PE Gate, Pacific Red Holdings
