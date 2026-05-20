@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Ciridae Command Center — Dashboard Generator
+Bhatera Roll-Up Platform — Dashboard Generator
 Run: python3 generate_dashboard.py
 Opens dashboard at http://localhost:8000
 """
@@ -11,7 +11,7 @@ import threading
 import webbrowser
 
 # ── OUTPUT FOLDER ──────────────────────────────
-OUT = "ciridae-dashboard"
+OUT = "bhatera-dashboard"
 os.makedirs(OUT, exist_ok=True)
 
 # ══════════════════════════════════════════════
@@ -22,7 +22,7 @@ HTML = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ciidae — Command Center</title>
+<title>Bhatera — Command Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
@@ -35,10 +35,15 @@ HTML = """<!DOCTYPE html>
   <aside class="sidebar">
     <div class="brand">
       <div class="brand-row">
-        <svg class="logo-mark" viewBox="0 0 100 95" fill="white">
-          <path d="M50 3C51 18 63 20 90 30 76 37 70 48 74 82 62 68 54 65 30 82 34 48 28 37 10 30 37 20 49 18 50 3Z"/>
+        <svg class="logo-mark" viewBox="0 0 40 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0" y="0" width="10" height="72" rx="2" fill="#c49f75"/>
+          <rect x="0" y="0" width="30" height="10" rx="2" fill="#c49f75"/>
+          <rect x="0" y="31" width="28" height="10" rx="2" fill="#c49f75"/>
+          <rect x="0" y="62" width="40" height="10" rx="2" fill="#c49f75"/>
+          <rect x="20" y="0" width="10" height="41" rx="5" fill="#c49f75"/>
+          <rect x="20" y="31" width="18" height="41" rx="9" fill="#c49f75"/>
         </svg>
-        <span class="brand-name">Ciidae</span>
+        <span class="brand-name">Bhatera</span>
       </div>
       <div class="client-pill">
         <div class="cl">Active client</div>
@@ -129,8 +134,8 @@ HTML = """<!DOCTYPE html>
         </div>
         <div class="panel"><div class="ph"><span class="pt">Deployment Phases</span></div>
           <div class="phr">
-            <div class="phb phbd"><div class="phn">Phase 01</div><div class="phname">WD</div><div class="phs" style="color:#4a5668">Complete · all 6 locations</div></div>
-            <div class="phb phbd"><div class="phn">Phase 02</div><div class="phname">SC</div><div class="phs" style="color:#4a5668">Complete · live in production</div></div>
+            <div class="phb phbd"><div class="phn">Phase 01</div><div class="phname">WD</div><div class="phs" style="color:#2a5a8c">Complete · all 6 locations</div></div>
+            <div class="phb phbd"><div class="phn">Phase 02</div><div class="phname">SC</div><div class="phs" style="color:#2a5a8c">Complete · live in production</div></div>
             <div class="phb phba"><div class="phn">Phase 03</div><div class="phname">CC</div><div class="phs" style="color:#c49f75">Active · month 10 of ongoing</div></div>
           </div>
         </div>
@@ -231,10 +236,10 @@ HTML = """<!DOCTYPE html>
       <section class="view" id="view-equity">
         <div class="g2">
           <div class="panel">
-            <div class="eqc"><div class="eqv">$1.84M</div><div class="eql">Ciidae equity value — 7% stake</div></div>
+            <div class="eqc"><div class="eqv">$1.84M</div><div class="eql">Bhatera equity value — 7% stake</div></div>
             <div class="eqr"><span class="eqk">Entry platform value</span><span class="eqval">$8.6M</span></div>
             <div class="eqr"><span class="eqk">Current platform value</span><span class="eqval bl">$26.2M</span></div>
-            <div class="eqr"><span class="eqk">Ciidae stake</span><span class="eqval">7%</span></div>
+            <div class="eqr"><span class="eqk">Bhatera stake</span><span class="eqval">7%</span></div>
             <div class="eqr"><span class="eqk">Cash deployed</span><span class="eqval">$95K</span></div>
             <div class="eqr"><span class="eqk">Cash-on-cash return</span><span class="eqval or">19.4×</span></div>
             <div class="eqr"><span class="eqk">Months active</span><span class="eqval">14</span></div>
@@ -258,7 +263,7 @@ CSS = """
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
   --or: #c49f75; --or2: #d4b08a;
-  --bl: #394351; --bl2: #4a5668;
+  --bl: #1a3a5c; --bl2: #2a5a8c;
   --bg: #05070E; --bg2: rgba(8,11,22,.82);
   --bd: rgba(255,255,255,.07);
   --font: "Trebuchet MS", Helvetica, sans-serif;
@@ -270,14 +275,14 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 .app-bg { position: absolute; inset: 0; z-index: 0;
   background:
     radial-gradient(ellipse 48% 38% at 10% 18%, rgba(196,159,117,.28) 0%, transparent 56%),
-    radial-gradient(ellipse 55% 45% at 78% 60%, rgba(57,67,81,.35) 0%, transparent 58%),
+    radial-gradient(ellipse 55% 45% at 78% 60%, rgba(26,58,92,.35) 0%, transparent 58%),
     radial-gradient(ellipse 85% 75% at 50% 50%, rgba(5,8,28,.88) 0%, transparent 100%),
     #05070E; }
 
 .sidebar { width: 214px; flex-shrink: 0; background: rgba(3,4,10,.92); border-right: 0.5px solid var(--bd); display: flex; flex-direction: column; padding: 22px 0; position: relative; z-index: 2; overflow-y: auto; }
 .brand { padding: 0 18px 18px; border-bottom: 0.5px solid var(--bd); margin-bottom: 14px; }
 .brand-row { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
-.logo-mark { width: 22px; height: 22px; flex-shrink: 0; }
+.logo-mark { width: 22px; height: 28px; flex-shrink: 0; }
 .brand-name { font-family: 'Syne', var(--font); font-size: 13px; font-weight: 800; letter-spacing: .22em; color: #fff; text-transform: uppercase; }
 .client-pill { background: rgba(196,159,117,.1); border: 0.5px solid rgba(196,159,117,.25); border-radius: 6px; padding: 6px 10px; }
 .cl { font-size: 9px; color: rgba(255,255,255,.3); letter-spacing: .1em; text-transform: uppercase; margin-bottom: 2px; }
@@ -288,12 +293,12 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 .ni.active { color: var(--or); background: rgba(196,159,117,.1); border-color: rgba(196,159,117,.22); }
 .ic { width: 13px; height: 13px; flex-shrink: 0; opacity: .55; }
 .ni.active .ic { opacity: 1; }
-.badge { margin-left: auto; background: rgba(57,67,81,.4); color: var(--bl2); font-size: 9.5px; padding: 1px 6px; border-radius: 8px; }
+.badge { margin-left: auto; background: rgba(26,58,92,.4); color: var(--bl2); font-size: 9.5px; padding: 1px 6px; border-radius: 8px; }
 .sf { margin-top: auto; padding: 14px 18px 0; border-top: 0.5px solid var(--bd); }
 .fl { font-size: 9px; letter-spacing: .18em; color: rgba(255,255,255,.18); text-transform: uppercase; margin-bottom: 8px; }
 .chips { display: flex; gap: 5px; }
 .chip { font-size: 9px; padding: 3px 8px; border-radius: 4px; font-weight: 600; letter-spacing: .05em; }
-.cd { background: rgba(57,67,81,.3); color: var(--bl2); border: 0.5px solid rgba(57,67,81,.4); }
+.cd { background: rgba(26,58,92,.3); color: var(--bl2); border: 0.5px solid rgba(26,58,92,.4); }
 .ca { background: rgba(196,159,117,.15); color: var(--or); border: 0.5px solid rgba(196,159,117,.28); }
 
 .main { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative; z-index: 2; }
@@ -315,7 +320,7 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 .mrow { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 10px; margin-bottom: 14px; }
 .mc { background: var(--bg2); border: 0.5px solid var(--bd); border-radius: 9px; padding: 13px 15px; }
 .mc.hl-or { border-color: rgba(196,159,117,.3); background: rgba(196,159,117,.07); }
-.mc.hl-bl { border-color: rgba(57,67,81,.5); background: rgba(57,67,81,.18); }
+.mc.hl-bl { border-color: rgba(26,58,92,.5); background: rgba(26,58,92,.18); }
 .ml { font-size: 9.5px; color: rgba(255,255,255,.28); letter-spacing: .13em; text-transform: uppercase; margin-bottom: 6px; }
 .mv { font-size: 22px; font-weight: 700; font-family: 'Syne', var(--font); color: #fff; line-height: 1; }
 .mv.or { color: var(--or); } .mv.bl { color: var(--bl2); }
@@ -325,7 +330,7 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 .ph { display: flex; justify-content: space-between; align-items: center; margin-bottom: 13px; }
 .pt { font-size: 10.5px; color: rgba(255,255,255,.38); letter-spacing: .14em; text-transform: uppercase; }
 .tor { font-size: 9.5px; background: rgba(196,159,117,.14); color: var(--or); padding: 2px 8px; border-radius: 4px; border: 0.5px solid rgba(196,159,117,.22); }
-.tbl2 { font-size: 9.5px; background: rgba(57,67,81,.3); color: var(--bl2); padding: 2px 8px; border-radius: 4px; border: 0.5px solid rgba(57,67,81,.4); }
+.tbl2 { font-size: 9.5px; background: rgba(26,58,92,.3); color: var(--bl2); padding: 2px 8px; border-radius: 4px; border: 0.5px solid rgba(26,58,92,.4); }
 .g2 { display: grid; grid-template-columns: minmax(0,1.6fr) minmax(0,1fr); gap: 12px; margin-bottom: 12px; }
 
 .sm2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 11px; }
@@ -341,7 +346,7 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 
 .phr { display: flex; gap: 10px; }
 .phb { flex: 1; border-radius: 8px; padding: 12px 13px; }
-.phbd { background: rgba(57,67,81,.15); border: 0.5px solid rgba(57,67,81,.35); }
+.phbd { background: rgba(26,58,92,.15); border: 0.5px solid rgba(26,58,92,.35); }
 .phba { background: rgba(196,159,117,.07); border: 0.5px solid rgba(196,159,117,.28); }
 .phn { font-size: 9px; color: rgba(255,255,255,.22); letter-spacing: .16em; text-transform: uppercase; margin-bottom: 3px; }
 .phname { font-family: 'Syne', var(--font); font-size: 12px; font-weight: 800; color: #fff; margin-bottom: 2px; letter-spacing: .06em; text-transform: uppercase; }
@@ -358,11 +363,11 @@ body { background: var(--bg); color: #fff; font-family: var(--font); -webkit-fon
 .lc { display: flex; align-items: center; gap: 8px; }
 .ln { width: 22px; height: 22px; border-radius: 5px; background: rgba(196,159,117,.13); color: var(--or); font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .pill { font-size: 9.5px; padding: 2px 8px; border-radius: 4px; display: inline-block; }
-.pbl { background: rgba(57,67,81,.3); color: var(--bl2); border: 0.5px solid rgba(57,67,81,.4); }
+.pbl { background: rgba(26,58,92,.3); color: var(--bl2); border: 0.5px solid rgba(26,58,92,.4); }
 .por { background: rgba(196,159,117,.14); color: var(--or); border: 0.5px solid rgba(196,159,117,.22); }
 .pgr { background: rgba(100,120,160,.15); color: #8AA0C8; border: 0.5px solid rgba(100,120,160,.2); }
 .pyw { background: rgba(180,140,60,.12); color: #C8A840; border: 0.5px solid rgba(180,140,60,.2); }
-.kbt { font-size: 9.5px; padding: 2px 8px; border-radius: 4px; background: rgba(57,67,81,.28); color: var(--bl2); border: 0.5px solid rgba(57,67,81,.4); display: inline-block; }
+.kbt { font-size: 9.5px; padding: 2px 8px; border-radius: 4px; background: rgba(26,58,92,.28); color: var(--bl2); border: 0.5px solid rgba(26,58,92,.4); display: inline-block; }
 
 .eqc { text-align: center; padding: 18px 0 14px; }
 .eqv { font-family: 'Syne', var(--font); font-size: 44px; font-weight: 800; color: var(--or); line-height: 1; }
@@ -408,7 +413,7 @@ new Chart(document.getElementById('c-rev'), {
     labels: ['M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12','M13','M14'],
     datasets: [
       { label: 'Revenue ($M)', data: [19.2,19.4,19.7,19.9,20.1,20.3,20.5,20.7,20.9,21.1,21.3,21.5,21.7,21.9], borderColor: '#c49f75', backgroundColor: 'rgba(196,159,117,.07)', fill: true, tension: 0.4, pointRadius: 2 },
-      { label: 'EBITDA ($M)', data: [1.73,1.82,1.95,2.06,2.18,2.28,2.45,2.62,2.8,2.98,3.1,3.22,3.38,3.5], borderColor: '#394351', backgroundColor: 'rgba(57,67,81,.12)', fill: true, tension: 0.4, pointRadius: 2 }
+      { label: 'EBITDA ($M)', data: [1.73,1.82,1.95,2.06,2.18,2.28,2.45,2.62,2.8,2.98,3.1,3.22,3.38,3.5], borderColor: '#1a3a5c', backgroundColor: 'rgba(26,58,92,.2)', fill: true, tension: 0.4, pointRadius: 2 }
     ]
   },
   options: Object.assign({}, base, {
@@ -420,7 +425,7 @@ new Chart(document.getElementById('c-rev'), {
 // ── INSURER CHART
 new Chart(document.getElementById('c-ins'), {
   type: 'bar',
-  data: { labels: ['State Farm','USAA','Allstate','Farmers','Liberty'], datasets: [{ data: [88,84,79,76,71], backgroundColor: ['#394351','#394351','#c49f75','#c49f75','#c49f75'], borderRadius: 4 }] },
+  data: { labels: ['State Farm','USAA','Allstate','Farmers','Liberty'], datasets: [{ data: [88,84,79,76,71], backgroundColor: ['#1a3a5c','#1a3a5c','#c49f75','#c49f75','#c49f75'], borderRadius: 4 }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
     scales: { x: { grid: gc, ticks: Object.assign({}, tc, { callback: function(v) { return v + '%'; } }), max: 100 }, y: { grid: { display: false }, ticks: tc } } }
 });
@@ -428,7 +433,7 @@ new Chart(document.getElementById('c-ins'), {
 // ── PIPELINE CHART
 new Chart(document.getElementById('c-pipe'), {
   type: 'bar',
-  data: { labels: ['Scoping','Estimating','Submitted','In rebuttal','Approved'], datasets: [{ data: [12,9,11,8,7], backgroundColor: ['#394351','#394351','#c49f75','#c49f75','#d4b08a'], borderRadius: 4 }] },
+  data: { labels: ['Scoping','Estimating','Submitted','In rebuttal','Approved'], datasets: [{ data: [12,9,11,8,7], backgroundColor: ['#1a3a5c','#1a3a5c','#c49f75','#c49f75','#d4b08a'], borderRadius: 4 }] },
   options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
     scales: { x: { grid: gc, ticks: tc }, y: { grid: { display: false }, ticks: tc } } }
 });
@@ -436,7 +441,7 @@ new Chart(document.getElementById('c-pipe'), {
 // ── VALUE DRIVERS CHART
 new Chart(document.getElementById('c-val'), {
   type: 'bar',
-  data: { labels: ['Entry value','Revenue lift','Margin expansion','Multiple expansion'], datasets: [{ data: [8.6,3.4,7.1,6.5], backgroundColor: ['rgba(255,255,255,.1)','#c49f75','#d4b08a','#394351'], borderRadius: 4 }] },
+  data: { labels: ['Entry value','Revenue lift','Margin expansion','Multiple expansion'], datasets: [{ data: [8.6,3.4,7.1,6.5], backgroundColor: ['rgba(255,255,255,.1)','#c49f75','#d4b08a','#1a3a5c'], borderRadius: 4 }] },
   options: Object.assign({}, base, { scales: { x: { grid: { display: false }, ticks: tc }, y: { grid: gc, ticks: Object.assign({}, tc, { callback: function(v) { return '$' + v + 'M'; } }) } } })
 });
 
@@ -446,8 +451,8 @@ new Chart(document.getElementById('c-scale'), {
   data: {
     labels: ['6 loc','8 loc','10 loc','12 loc','15 loc','18 loc'],
     datasets: [
-      { label: 'Ciidae equity', data: [1.84,2.4,3.1,3.8,4.8,5.8], borderColor: '#c49f75', backgroundColor: 'rgba(196,159,117,.08)', fill: true, tension: 0.4, pointRadius: 3 },
-      { label: 'Platform value', data: [26.2,32,40,52,62,74], borderColor: '#394351', backgroundColor: 'rgba(57,67,81,.1)', fill: true, tension: 0.4, pointRadius: 3, yAxisID: 'y2' }
+      { label: 'Bhatera equity', data: [1.84,2.4,3.1,3.8,4.8,5.8], borderColor: '#c49f75', backgroundColor: 'rgba(196,159,117,.08)', fill: true, tension: 0.4, pointRadius: 3 },
+      { label: 'Platform value', data: [26.2,32,40,52,62,74], borderColor: '#1a3a5c', backgroundColor: 'rgba(26,58,92,.15)', fill: true, tension: 0.4, pointRadius: 3, yAxisID: 'y2' }
     ]
   },
   options: {
@@ -492,8 +497,8 @@ def open_browser():
     time.sleep(0.5)
     webbrowser.open(f"http://localhost:{PORT}")
 
-print(f"\\nServer running at http://localhost:{PORT}")
-print("Press Ctrl+C to stop\\n")
+print(f"\nServer running at http://localhost:{PORT}")
+print("Press Ctrl+C to stop\n")
 
 threading.Thread(target=open_browser, daemon=True).start()
 http.server.HTTPServer(("", PORT), Handler).serve_forever()
